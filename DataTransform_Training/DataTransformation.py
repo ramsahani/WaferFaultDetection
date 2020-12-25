@@ -26,10 +26,10 @@ class dataTransform:
 
         log_file = open("Training_Logs/dataTransformLog.txt",'a+')
         try:
-            onlyfiles = [f for f in listdir(self.goodDatapath)]
+            onlyfiles = [f for f in listdir(self.goodDataPath)]
             for file in onlyfiles:
                 csv= pandas.read_csv(self.goodDataPath+"/" + file)
-                csv.filllna("NULL",inplace=True)
+                csv.fillna("NULL",inplace=True)
                 csv['Wafer']= csv['Wafer'].str[6:]
                 csv.to_csv(self.goodDataPath+'/'+ file,index=None, header=True)
                 self.logger.log(log_file,"%s: File Transformed successfully !! "% file)

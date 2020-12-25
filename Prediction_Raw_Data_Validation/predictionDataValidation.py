@@ -34,7 +34,7 @@ class Prediction_Data_validation:
                 dic = json.load(f)
                 f.close()
             pattern = dic['SampleFileName']
-            LengthOfDateStampInFile = dic['LenghtOfDateStampInFile']
+            LengthOfDateStampInFile = dic['LengthOfDateStampInFile']
             LengthOfTimeStampInFile  = dic['LengthOfTimeStampInFile']
             column_names = dic['ColName']
             NumberofColumns = dic['NumberofColumns']
@@ -93,10 +93,10 @@ class Prediction_Data_validation:
         try:
             path = os.path.join("Prediction_Raw_Files_Validated/","Good_Raw/")
             if not os.path.isdir(path):
-                os.makedires(path)
+                os.makedirs(path)
             path = os.path.join("Prediction_Raw_Files_Validated/","Bad_Raw/")
-            if not os.path.idir(path):
-                os.makedires(path)
+            if not os.path.isdir(path):
+                os.makedirs(path)
 
         except OSError as ex:
             file = open("Prediction_Logs/GeneralLog.txt",'a+')
@@ -128,7 +128,7 @@ class Prediction_Data_validation:
             file.clos()
             raise OSError
 
-    def deleteExistingBadataTrainingFolder(self):
+    def deleteExistingBadDataTrainingFolder(self):
         """
             This method deletes the directory made to store the bad Data.
         :return:None
@@ -156,14 +156,14 @@ class Prediction_Data_validation:
         :return: None
         """
         now = datetime.now()
-        data = now.data()
+        date = now.date()
         time = now.strftime("%H%M%S")
         try:
             path = "PredictionArchivedBadData"
             if not os.path.isdir(path):
                 os.makedirs(path)
             source = 'Prediction_Raw_Files_Validated/Bad_Raw/'
-            dest = "PredictionArchivedBadData/BadData_" + str(data) + '_' + str(time)
+            dest = "PredictionArchivedBadData/BadData_" + str(date) + '_' + str(time)
 
             if not os.path.isdir(dest):
                 os.makedirs(dest)
@@ -244,7 +244,7 @@ class Prediction_Data_validation:
             :return: None
             """
         try:
-            f = open("Prediction_Logs/columnValidation.txt",'a+')
+            f = open("Prediction_Logs/columnValidationLog.txt",'a+')
             self.logger.log(f,"Coulumn Length Validation Started !!!")
             for file in listdir('Prediction_Raw_Files_Validated/Good_Raw/'):
                 csv = pd.read_csv("Prediction_Raw_Files_Validated/Good_Raw/" + file)
@@ -255,7 +255,7 @@ class Prediction_Data_validation:
                     shutil.move("Prediction_Raw_Files/Validated/Good_Raw/"+file  ,"Prediction_Raw_Files_Validated/Bad_Raw")
                     self.logger.log(f,"Invalid Column Length for the file !! moved to Bad Raw Data folder :: %s" %  file)
 
-            self.logger(f,"Column Length Validation Completed !!")
+            self.logger.log(f,"Column Length Validation Completed !!")
 
         except OSError:
             f=open("Prediction_Logs/columnValidationLog.txt",'a+')
@@ -271,8 +271,8 @@ class Prediction_Data_validation:
 
     def deletePredictionFile(self):
 
-        if os.path.exists("Prodiction_Output_File/Predictions.csv"):
-            os.remove('Prediction_Output_File/Prediction.csv')
+        if os.path.exists("Prediction_Output_File/Predictions.csv"):
+            os.remove('Prediction_Output_File/Predictions.csv')
 
     def validateMissingValuesInWholeColumn(self):
         """

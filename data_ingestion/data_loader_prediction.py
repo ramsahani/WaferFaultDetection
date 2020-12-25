@@ -3,7 +3,6 @@ import pandas as pd
 class Data_Getter_Pred:
     """ This class shall be use for obtaining the data from the source for  prediction ."""
 
-
     def __init__(self, file_object, logger_bject):
         self.prediction_file = "Prediction_FileFromDB/InputFile.csv"
         self.file_object= file_object
@@ -23,4 +22,4 @@ class Data_Getter_Pred:
                                "Exception occurred in get_data method of Data_Getter_Pred class. Exception message : "+str(e))
             self.logger_object(self.file_object,
                                "Data Load Unsuccessful. Exited the get_data method of Data_Getter_Pred class")
-            raise Exception
+            raise Exception()

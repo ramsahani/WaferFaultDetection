@@ -24,7 +24,7 @@ class File_Operation:
                 os.makedirs(path)
             else:
                 os.makedirs(path)
-            with open(path + "/" + filename + " .sav") as f:
+            with open(path + "/" + filename + '.sav','wb') as f:
                 pickle.dump(model,f) # save the model to file
 
             self.logger_object.log(self.file_object, "Model File "+ filename+ " saved. Exited the save_model method of File_Operration Class")
@@ -57,10 +57,11 @@ class File_Operation:
         self.logger_object.log(self.file_object , 'Entered the find_correct_model_file method of File_Operation class')
 
         try:
-            self.cluster_numberr = cluster_number
+            self.cluster_number = cluster_number
             self.folder_name = self.model_directory
             self.list_of_model_files = []
-            for self.file in self.file.list_of_files:
+            self.list_of_files= os.listdir(self.folder_name)
+            for self.file in self.list_of_files:
                 try:
                     if (self.file.index(str(self.cluster_number)) != -1):
                         self.model_name = self.file

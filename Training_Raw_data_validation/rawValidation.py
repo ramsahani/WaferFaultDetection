@@ -3,8 +3,8 @@ from os import listdir
 import os
 import re
 import json
-import shutil
 import pandas as pd
+import shutil
 from application_logging.logger import App_Logger
 
 class Raw_Data_validation:
@@ -31,7 +31,7 @@ class Raw_Data_validation:
                 f.close()
 
             pattern = dic['SampleFileName']
-            LengthOfDateStampInFile = dic['LengthOfDatStampInFile']
+            LengthOfDateStampInFile = dic['LengthOfDateStampInFile']
             LengthOfTimeStampInFile = dic['LengthOfTimeStampInFile']
             column_names = dic['ColName']
             NumberofColumns = dic['NumberofColumns']
